@@ -7,16 +7,39 @@ body {
   background-position: center;
   color: white;
   display: grid;
+  grid-template-rows: 1fr;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   width: 100%;
   font-family: $font-primary;
+  @include media-query(large) {
+    background: url('/images/bg-desktop.png'), $very-dark-blue;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 100% 50%;
+  }
 }
 //main
 .card {
   padding: 1rem;
-
+  @include media-query(large) {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  //Card Top
+  &__top {
+    margin-bottom: 1rem;
+    padding: 1rem 4rem 1rem 1rem;
+    background: $dark-blue;
+    border-radius: 1rem 6rem 1rem 1rem;
+    @include media-query(large) {
+      margin-bottom: 0;
+      padding-right: 8rem;
+    }
+  }
   &__logo {
     padding: 1rem;
   }
@@ -25,18 +48,7 @@ body {
     gap: 1rem;
     padding: 1rem;
   }
-  &__top {
-    margin-bottom: 1rem;
-    padding: 1rem 4rem 1rem 1rem;
-    background: $dark-blue;
-    border-radius: 1rem 6rem 1rem 1rem;
-  }
-  &__bottom {
-    padding: 1rem;
-    background: $dark-blue;
-    border-radius: 10px;
-    display: flex;
-  }
+
   &__icons {
     display: flex;
     justify-self: center;
@@ -52,30 +64,76 @@ body {
       align-items: center;
     }
   }
+  //Card Bottom Part
+  &__bottom {
+    padding: 1rem 1rem 0 1rem;
+    background: $dark-blue;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    @include media-query(large) {
+      height: 150px;
+      width: 600px;
+      padding: 1rem 1rem 2rem 1rem;
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__body-desc {
+    width: 100%;
+    text-align: center;
+  }
+  &__body-desc h1 {
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $pale-blue;
+  }
 
   &__range {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
+    width: 100%;
+    font-weight: 700;
+    color: $pale-blue;
   }
 
-  &__body-desc p {
-    padding: 1rem;
-  }
   &__data-left {
     background: white;
     color: black;
-    max-width: 150px;
-    padding: 1rem; 
+    padding: 1rem;
     border-radius: 0.5rem;
-    //z-index: 999;
     margin: 0 auto;
-    transform: translateY(60%);
-
+    transform: translateY(20%);
+    @include media-query(large) {
+      transform: translateX(125%) translateY(-250%);
+      ::after {
+        content: '';
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        border-left: 24px solid transparent;
+        border-right: 12px solid white;
+        border-top: 12px solid transparent;
+        border-bottom: 20px solid transparent;
+        left: 76%;
+        bottom: -30%;
+      }
+    }
 
     & span:nth-child(1) {
       font-weight: bold;
       font-size: 2rem;
+    }
+    & span:nth-child(2) {
+      font-weight: bold;
+      font-size: 1rem;
+      color: $grayish-Blue;
     }
   }
 }
@@ -83,6 +141,7 @@ body {
 //Range Slider
 .card__slider {
   padding-inline: 1rem;
+  width: 100%;
 }
 .slider {
   -webkit-appearance: none;
@@ -93,8 +152,8 @@ body {
   outline: none;
   opacity: 0.7;
   overflow: hidden;
-  // -webkit-transition: 0.2s;
-  //transition: opacity 0.2s;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
